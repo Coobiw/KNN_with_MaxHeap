@@ -10,6 +10,8 @@ This is the K Nearest Neighbor module. I combine them in a class.
 
 I also write some function document in this file. You can run it to see them.
 
+Actually, when you use the model to predict, you will use majority votes in my view. You can multiply a weight when voting. Maybe,the weight can be "1/distance".
+
 ### maxheap.py
 In this file, I establish a big root binary heap to optimize the KNN algorithm. You can run it to see the performance.
 
