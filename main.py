@@ -99,7 +99,7 @@ def main():
 
 
     # split the train and the validation set
-    train_X,train_Y,val_X,val_Y = dataset_split(data_X,data_Y,0.2)
+    train_X,train_Y,val_X,val_Y = dataset_split(data_X,data_Y,0.5)
 
     # initialize the knn
     knn = K_Nearest_Neighbor(train_X,train_Y,val_X,val_Y)

@@ -1,3 +1,5 @@
+import math
+
 class big_root_heap:
     def __init__(self, maxsize):
         self.heap = []
@@ -27,16 +29,29 @@ class big_root_heap:
             self.adjust_heap(i)
             i -= 1
 
+    def insert_node(self,item):
+        self.heap.append(item)
+        end = self.len()
+        i = math.floor(end/2)
+        last = end
+        self.heap[0] = item
+        while i>=1:
+            if(self.heap[i]["distance"]<self.heap[0]["distance"]):
+                self.heap[last] = self.heap[i]
+            last = i
+            i = math.floor(i/2)
+
+
+
     def push(self, item):
         if self.len() < self.maxsize:
-            self.heap.append(item)
-            self.build_heap()
+            self.insert_node(item)
+
         else:
             top = self.top()
             if top["distance"] > item["distance"]:
                 self.pop()
-                self.heap.append(item)
-                self.build_heap()
+                self.insert_node(item)
 
     def pop(self):
         self.heap.pop(1)
@@ -49,7 +64,7 @@ if __name__ == "__main__":
     heap = big_root_heap(maxsize=2)
     test = [15,10,7,25,31,15]
     for i,each in enumerate(test):
-        heap.push({'index':i,'distance':each})
+        heap.push({'index':i+1,'distance':each})
 
     for i, each in enumerate(heap.heap):
         if i:
