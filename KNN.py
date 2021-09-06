@@ -65,10 +65,10 @@ class K_Nearest_Neighbor():
         for i in range(K):
             weight = heap.heap[i]['distance']
             if self.train_Y[heap.heap[i]['index']][0]==0:
-                counter0+=1#*weight
+                counter0+=1#/weight
 
             if self.train_Y[heap.heap[i]['index']][0]==1:
-                counter1+=1#*weight
+                counter1+=1#/weight
 
         if counter1>=counter0:
             return 1

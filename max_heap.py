@@ -10,7 +10,7 @@ class big_root_heap:
 
     def adjust_heap(self, begin):
         end = self.len()
-        self.heap[0] = self.heap[end]
+        self.heap[0] = self.heap[begin]
         i = 2 * begin
         while i <= end:
             if (i < end and self.heap[i]["distance"] < self.heap[i + 1]["distance"]):
@@ -20,8 +20,9 @@ class big_root_heap:
             else:
                 self.heap[begin] = self.heap[i]
                 begin = i
-            self.heap[begin] = self.heap[0]
+
             i *= 2
+        self.heap[begin] = self.heap[0] #放入最后应该放的位置
 
     def build_heap(self):
         i = self.len() // 2
@@ -54,18 +55,23 @@ class big_root_heap:
                 self.insert_node(item)
 
     def pop(self):
-        self.heap.pop(1)
+        self.heap[1] = self.heap[self.len()]
+        self.heap.pop(self.len())
+        if self.len()!=0:
+            self.adjust_heap(1)
+
+
 
     def top(self):
         return self.heap[1]
 
 
 if __name__ == "__main__":
-    heap = big_root_heap(maxsize=2)
-    test = [15,10,7,25,31,15]
+    heap = big_root_heap(maxsize=5)
+    test = [15,10,7,25,31,157,7,7,6,5,17,13,11,12,10]
     for i,each in enumerate(test):
         heap.push({'index':i+1,'distance':each})
-
+    heap.pop()
     for i, each in enumerate(heap.heap):
         if i:
             print("index: {}".format(each["index"]), end='  ')
